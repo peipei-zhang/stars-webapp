@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>我的2017星座运势</title>
+	<!-- 基础资源 jQuery/fullpage -->
+	<script type="text/javascript" src="../javascript/libs/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../javascript/libs/jquery.fullpage.min.js"></script>
+	<link rel="stylesheet"  type="text/css" href="../stylesheet/componentBase.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheet/componentBar.css">
+    <style type="text/css">
+		html,body{
+			margin: 0;
+			padding: 0;
+			font-size:12px;
+			font-family: "microsoft yahei";
+			background-color: #fff;
+			width:100%;
+			height:100%;
+		}
+		.page{
+			width:100%;
+			height:100%;
+		}
+	</style>
+</head>
+<body>
+	<!-- 柱状图组件 -->
+	<div class="page">
+
+	</div>
+	<!-- 组件均基于componentBase开发 -->
+	<script type="text/javascript" src="../javascript/componentBase.js"></script>
+    <script type='text/javascript' src="../javascript/componentBar.js"></script>
+	<script type="text/javascript">
+	    //实例化H5componentBase对象
+	    config={
+	    	type:"bar",
+	    	width:600,
+	    	height:800,
+	    	center:true,
+	    	data:[
+              {name:"爱情",per:.6,color:"#ff7676"},
+              {name:"事业",per:.7},
+              {name:"财富",per:1}
+	    	],
+	    	css:{
+	    		backgroundColor:"#ffeeee",
+	    		opacity:0,
+	    	},
+	    	animateIn:{
+	    		opacity:1 ,
+	    		top:100
+	    	},
+	    	animateOut:{
+	    		opacity:0
+	    	},
+	    	delay:100
+	    }
+	    var component=H5componentBar('xingzuo',config);
+	    $(".page").append(component)
+	    var leave=true;
+	    $("body").click(function(){
+	    	if(leave){
+	    		component.trigger("onLoad");
+	    		leave=!leave;
+	    	}else{
+	    		component.trigger("onLeave");
+	    		leave=!leave;
+	    	}
+	    })
+	</script>
+</body>
+</html>

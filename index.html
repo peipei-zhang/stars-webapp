@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>我的2017星座运势</title>
+	<!-- 基础资源 jQuery/fullpage -->
+	<script type="text/javascript" src="javascript/libs/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="javascript/libs/jquery.fullpage.min.js"></script>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="stylesheet/page.css">
+	<link rel="stylesheet" type="text/css" href="stylesheet/componentBase.css">
+	<link rel="stylesheet" type="text/css" href="stylesheet/componentBar.css">
+	<link rel="stylesheet" type="text/css" href="stylesheet/mine.css">
+	<!-- loading资源 -->
+	<link rel="stylesheet" type="text/css" href="stylesheet/loading.css">
+	<script type="text/javascript" src="javascript/loading.js"></script>
+</head> 
+<body>
+	<!-- loading -->
+	<div class="loading">
+		<div class="double-bounce1"></div>
+		<div class="double-bounce2"></div>
+		<div id="rate">0%</div>
+	</div>
+	<!-- js资源 -->
+	<script type="text/javascript" src="javascript/page.js"></script>
+	<script type="text/javascript" src="javascript/componentBase.js"></script>
+	<script type="text/javascript" src="javascript/componentBar.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//实例化app对象
+			var app=App();
+			//添加方法
+			app.whenAddPage=function(){
+				this.addComponent("slide",{
+					text:"向下滑动",
+					height:36,
+					css:{
+						right:"10px",
+						bottom:0,
+						lineHeight:"18px",
+						fontSize:"12px",
+						opacity:0
+					},
+					animateIn:{
+						opacity:0.7
+					},
+					animateOut:{
+						opacity:0
+					}
+				})
+			}
+			//初始数据
+			var stardata=[
+			{name:"白羊座",title:"白羊 - 3月21日～4月19日",bg:"baiyang"},
+			{name:"金牛座",title:"金牛 - 4月20日～5月20日",bg:"jinniu"},
+			{name:"双子座",title:"双子 - 5月21日～6月21日",bg:"shuangzi"},
+			{name:"巨蟹座",title:"巨蟹 - 6月22日～7月22日",bg:"juxie"},
+			{name:"狮子座",title:"狮子 - 7月23日～8月22日",bg:"shizi"},
+			{name:"处女座",title:"处女 - 8月23日～9月22日",bg:"chunv"},
+			{name:"天秤座",title:"天秤 - 9月23日～10月23日",bg:"tianchen"},
+			{name:"天蝎座",title:"天蝎 - 10月24日～11月22日",bg:"tianxie"},
+			{name:"射手座",title:"射手 - 11月23日～12月21日",bg:"sheshou"},
+			{name:"摩羯座",title:"摩羯 - 12月22日～1月19日",bg:"mojie"},
+			{name:"水瓶座",title:"水瓶 - 1月20日～2月18日",bg:"shuiping"},
+			{name:"双鱼座",title:"双鱼 - 2月19日～3月20日",bg:"shuangyu"},
+			];
+			// 开始
+			//添加首页
+			app
+			.addPage("index","首页")
+			.addComponent("start",{
+				type:"base", 
+				text:"开始我的2017星座运势",
+				bg:"images/index.png",
+				width:300,
+				height:300,
+				center:true,
+				css:{
+					borderRadius:"50%",
+					lineHeight:"150px",
+					textAlign:"center",
+					backgroundColor:"rgba(76,114,215,0.2)",
+					top:"30%",
+					fontSize:"14px",
+					opacity:0
+				},
+				animateIn:{
+					top:"55%",
+					opacity:1
+				},
+				animateOut:{
+					top:0,
+					opacity:0
+				},
+				onclick:function(){
+					$.fn.fullpage.moveTo(2)
+				},
+				delay:500
+			})
+			//添加分类页
+			var page_index=3;
+			var list=app.addPage("category","分类")
+			list.addComponent("text",{
+				text:"选择我的星座，看看我的今日运势",
+				height:60,
+				css:{
+					fontSize:"14px",
+					left:"-30px",
+					top:"4%",
+					width:"100%",
+					textAlign:"center",
+					opacity:0
+				},
+				animateIn:{
+					opacity:1,
+					left:0
+				},
+				animateOut:{
+					opacity:0,
+					left:"-30px"
+				},
+				delay:900
+			})
+			for(var i=0;i<stardata.length;i++){
+				if(i<3){
+					stardata[i].top="10%";
+				}
+				if(i>=3&&i<6){
+					stardata[i].top="35%"
+				}
+				if(i>=6&&i<9){
+					stardata[i].top="55%"
+				}
+				if(i>=9&&i<12){
+					stardata[i].top="75%"
+				}
+				for(var j=0;j<=3;j++){
+					stardata[(j*3)].left="5%";
+					stardata[(j*3+1)].center=true;
+					stardata[(j*3+2)].right="5%";
+				}
+				list.addComponent("starSign",{
+					width:180,
+					height:180,
+					center:stardata[i].center,
+					text:stardata[i].name,
+					bg:"images/"+stardata[i].bg+".png",
+					left:stardata[i].left,
+					right:stardata[i].right,
+					css:{
+						color:"#ffffff",
+						top:stardata[i].top,
+						lineHeight:"180px",
+						textAlign:"center",
+						opacity:0
+					},
+					animateIn:{
+						opacity:1,
+					},
+					animateOut:{
+						opacity:0
+					},
+					onclick:(function(i){
+						return function(){
+							var page=page_index+(i)*2;
+							$.fn.fullpage.moveTo(page)
+						}
+					})(i)
+				})
+			}
+
+            //添加页面
+            //获取数据
+            var appkey="461a2c345d98b34c";
+            var url="http://api.jisuapi.com/astro/fortune";
+            var count=0
+            var addDataPage=function(i,eachstar){  
+            	$.getJSON(url+"?astroid="+(i+1)+"&appkey="+appkey+"&callback=?",function(result){
+            		count=count+1;
+            		$.each(result,function(i,star){
+            			var today=result.result.today;
+            			eachstar.star={
+            				love:(parseInt(today.love))/10,
+            				work:(parseInt(today.career))/10,
+            				health:(parseInt(today.health))/10,
+            				money:(parseInt(today.money))/10,
+            				summary:today.presummary
+            			}
+            		});
+				     //数据
+				     app.addPage("constellation",eachstar.name)
+				     .addComponent("img",{
+				     	width:180,
+				     	height:180,
+				     	bg:"images/"+eachstar.bg+".png",
+				     	center:true,
+				     	css:{
+				     		top:0,
+				     		opacity:0
+				     	},
+				     	animateIn:{
+				     		opacity:1,
+				     		top:"10%"
+				     	},
+				     	animateOut:{
+				     		opacity:0,
+				     		top:0
+				     	}
+				     })
+				     .addComponent("title",{
+				     	text:eachstar.title,
+				     	css:{
+				     		width:"100%",
+				     		textAlign:"center",
+				     		color:"#ffffff",
+				     		fontSize:"16px",
+				     		top:0,
+				     		opacity:0
+				     	},
+				     	animateIn:{
+				     		opacity:1,
+				     		top:"28%",
+				     	},
+				     	animateOut:{
+				     		opacity:0,
+				     		top:0,
+				     	}
+				     })
+				     .addComponent("bar",{
+				     	type:"bar",
+				     	data:[
+				     	{name:"爱情",per:eachstar.star.love,color:"#ff7676"},
+				     	{name:"健康",per:eachstar.star.health},
+				     	{name:"财富",per:eachstar.star.money},
+				     	{name:"工作",per:eachstar.star.work}
+				     	],
+				     	width:600,
+				     	height:200,
+				     	css:{
+				     		top:"45%",
+				     		opacity:0,
+				     		left:"-40px"
+				     	},
+				     	center:true,
+				     	animateIn:{
+				     		opacity:1,
+				     		left:"50%"
+				     	},
+				     	animateOut:{
+				     		opacity:0,
+				     		left:"-40px"
+				     	},
+				     	delay:700
+				     })
+				     .addComponent('toCate',{
+				     	text:"星座",
+				     	width:120,
+				     	height:120,
+				     	css:{
+				     		borderRadius:"50%",
+				     		backgroundColor:"rgba(76, 114, 215,.5)",
+				     		bottom:0,
+				     		left:0,
+				     		color:"#ffffff",
+				     		lineHeight:"60px",
+				     		textAlign:"center",
+				     		opacity:0
+				     	},
+				     	animateIn:{
+				     		opacity:1,
+				     		left:"20%",
+				     		bottom:"20%"
+				     	},
+				     	animateOut:{
+				     		opacity:0,
+				     		left:0,
+				     		bottom:0
+				     	},
+				     	onclick:function(){
+				     		$.fn.fullpage.moveTo(2)
+				     	}
+				     })
+				     .addComponent("more",{
+				     	text:"更多",
+				     	width:120,
+				     	height:120,
+				     	css:{
+				     		borderRadius:"50%",
+				     		backgroundColor:"rgba(255, 114, 130,.5)",
+				     		bottom:0,
+				     		right:0,
+				     		color:"#ffffff",
+				     		lineHeight:"60px",
+				     		textAlign:"center",
+				     		opacity:0
+				     	},
+				     	animateIn:{
+				     		opacity:1,
+				     		right:"20%",
+				     		bottom:"20%"
+				     	},
+				     	animateOut:{
+				     		opacity:0,
+				     		right:0,
+				     		bottom:0
+				     	},
+				     	onclick:(function(i){
+				     		return function(){
+				     			var page=page_index+(i)*2+1;
+				     			$.fn.fullpage.moveTo(page)
+				     		}
+				     	})(i)
+				     })
+				  //更多
+				  .addPage("more","更多")
+				  .addComponent("share",{
+				  	width:128,
+				  	height:120,
+				  	bg:"images/share.png",
+				  	css:{
+				  		right:"10px",
+				  		top:"10px",
+				  		opacity:0
+				  	},
+				  	animateIn:{
+				  		opacity:1
+				  	},
+				  	animateOut:{
+				  		opacity:0
+				  	},
+				  	delay:700
+				  })
+				  .addComponent("img",{
+				  	width:180,
+				  	height:180,
+				  	bg:"images/"+eachstar.bg+".png",
+				  	center:true,
+				  	css:{
+				  		top:"10%"
+				  	}
+				  })
+				  .addComponent("content",{
+				  	center:true,
+				  	width:560,
+				  	text:eachstar.star.summary,
+				  	css:{
+				  		top:"38%",
+				  		color:"#ffffff",
+				  		fontSize:"14px",
+				  		lineHeight:1.5,
+				  		opacity:0
+				  	},
+				  	animateIn:{
+				  		opacity:1
+				  	},
+				  	animateOut:{
+				  		opacity:0
+				  	}
+				  })
+				  .addComponent("title",{
+				  	text:eachstar.name,
+				  	css:{
+				  		width:"100%",
+				  		textAlign:"center",
+				  		color:"#ffffff",
+				  		top:"25%",
+				  		fontSize:"16px"
+				  	}
+				  })
+				  .addComponent("back",{
+				  	text:"返回",
+				  	width:120,
+				  	height:120,
+				  	center:true,
+				  	css:{
+				  		borderRadius:"50%",
+				  		backgroundColor:"rgba(255, 114, 130,.5)",
+				  		bottom:0,
+				  		color:"#ffffff",
+				  		lineHeight:"60px",
+				  		textAlign:"center",
+				  		opacity:0
+				  	},
+				  	animateIn:{
+				  		opacity:1,
+				  		bottom:"10%"
+				  	},
+				  	animateOut:{
+				  		opacity:0,
+				  		bottom:0
+				  	},
+				  	onclick:(function(i){
+				  		return function(){
+				  			var page=page_index+(i)*2;
+				  			$.fn.fullpage.moveTo(page)
+				  		}
+				  	})(i),
+				  	delay:900
+				  })
+            	   //结束
+            	   //loader
+            	   if(count<stardata.length){
+            	   	i=i+1;
+            	   	addDataPage(i,stardata[i]);
+            	   	app.H5_loading(count,stardata.length);
+            	   }else{
+            	   	app.loader()
+            	   }
+            	})
+}
+        //初始化加载数据
+        addDataPage(0,stardata[0])
+    })
+</script>
+</body>
+</html>

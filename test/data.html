@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>data</title>
+	<script type="text/javascript" src="../javascript/libs/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+	<button>点击获取数据</button>
+	<script type="text/javascript">
+		var appkey="461a2c345d98b34c";
+		var url="http://api.jisuapi.com/astro/fortune";
+		var stardata=[
+		{name:"白羊座",title:"白羊 - 3月21日～4月19日",bg:"baiyang"},
+		{name:"金牛座",title:"金牛 - 4月20日～5月20日",bg:"jinniu"},
+		{name:"双子座",title:"双子 - 5月21日～6月21日",bg:"shuangzi"},
+		{name:"巨蟹座",title:"巨蟹 - 6月22日～7月22日",bg:"juxie"},
+		{name:"狮子座",title:"狮子 - 7月23日～8月22日",bg:"shizi"},
+		{name:"处女座",title:"处女 - 8月23日～9月22日",bg:"chunv"},
+		{name:"天秤座",title:"天秤 - 9月23日～10月23日",bg:"tianchen"},
+		{name:"天蝎座",title:"天蝎 - 10月24日～11月22日",bg:"tianxie"},
+		{name:"射手座",title:"射手 - 11月23日～12月21日",bg:"sheshou"},
+		{name:"摩羯座",title:"摩羯 - 12月22日～1月19日",bg:"jinniu"},
+		{name:"水瓶座",title:"水瓶 - 1月20日～2月18日",bg:"jinniu"},
+		{name:"双鱼座",title:"双鱼 - 2月19日～3月20日",bg:"jinniu"},
+		];
+		var appkey="461a2c345d98b34c";
+		var url="http://api.jisuapi.com/astro/fortune";
+		$.each(stardata,function(i,item){
+			$.getJSON(url+"?astroid="+(i+1)+"&appkey="+appkey+"&callback=?",function(result){
+				var today=result.result.today;
+				var	star={
+					work:(parseInt(today.career)*10)+"%",
+					health:(parseInt(today.health)*10)+"%",
+					love:(parseInt(today.love)*10)+"%",
+					money:(parseInt(today.money)*10)+"%",
+					summary:today.presummary
+				}
+				item.star=star;
+			})
+		})
+		console.log(stardata)
+	</script>
+</body>
+</html>

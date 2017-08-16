@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>我的2017星座运势</title>
+	<!-- 基础资源 jQuery/fullpage -->
+	<script type="text/javascript" src="../javascript/libs/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../javascript/libs/jquery.fullpage.min.js"></script>
+	<style type="text/css">
+		body{
+			margin:0;
+			padding: 0;
+		}
+		.page{
+			position: relative;
+		}
+		.component{
+			position:absolute;
+			width: 200px;
+			height: 200px;
+			top:50%;
+			left: 50%;
+			margin-top: -100px;
+			margin-left: -100px;
+			background-color: #FF7474;
+		}
+	</style>
+</head>
+<body>
+	<!-- 验证fullpage插件生效，组织整体页面结构 -->
+	<div id="constellation">
+		<div class="page section" id="page-1">
+			<div class="component index">index</div>
+		</div>
+		<div class="page section" id="page-2">
+			<div class="component category">十二星座</div>
+		</div>
+		<div class="page section" id="page-3">
+			<div class="component constellation">白羊座</div>
+		</div>
+		<div class="page section" id="page-4">
+			<div class="component constellation">金牛座</div>
+		</div>
+		<div class="page section" id="page-4">
+			<div class="component constellation">。。。</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+            $('#constellation').fullpage({})
+		})
+	</script>
+</body>
+</html>
